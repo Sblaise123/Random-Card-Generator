@@ -1,15 +1,8 @@
 import "./style.css";
-
 window.onload = () => {
-  document.querySelector(".card").classList.add("heart");
-  setTimeout(() => {
-    document.querySelector(".card").classList.remove("heart");
-    document.querySelector(".card").classList.add("spade");
-  }, 1000);
+  cardGenerator();
 };
-
-let generateRandomNumber;
-() => {
+let cardGenerator = () => {
   let numb = Math.floor(Math.random() * 12);
   let numbers = [
     "A",
@@ -26,8 +19,20 @@ let generateRandomNumber;
     "Q",
     "K"
   ];
-  let suit = ["diamond", "spade", "heart", "club"];
+  let suit = ["♦", "♣", "♥", "♠"];
 
-  let indexNumbers = Math.floor(Math.random() * numbers.length);
-  let indexSuit = Math.floor(Math.random() * suit.length);
+  let indexNumbers = [Math.floor(Math.random() * numbers.length)];
+  let indexSuit = [Math.floor(Math.random() * suit.length)];
+
+  if (suit[indexSuit] == "♥" || suit[indexSuit] == "♦") {
+    document.querySelector(".top-suit").style.color = "red";
+    document.querySelector(".number").style.color = "red";
+    document.querySelector(".bottom-suit").style.color = "red";
+  } else {
+    document.querySelector(".top-suit").style.color = "black";
+    document.querySelector(".bottom-suit").style.color = "black";
+  }
+  document.querySelector(".top-suit").innerHTML = suit[indexSuit];
+  document.querySelector(".number").innerHTML = numbers[indexNumbers];
+  document.querySelector(".bottom-suit").innerHTML = suit[indexSuit];
 };
